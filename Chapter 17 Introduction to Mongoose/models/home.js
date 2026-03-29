@@ -1,4 +1,6 @@
-const { ObjectId } = require("mongodb");
+const {
+  ObjectId,
+} = require("../../Chapter 18 Cookies and Sessions/node_modules/mongodb/mongodb");
 const mongoose = require("mongoose");
 const favourite = require("./favourite");
 
@@ -31,8 +33,7 @@ const homeSchema = mongoose.Schema({
 homeSchema.pre("findOneAndDelete", async function () {
   console.log("Came to prehook while deleting a home");
   const homeId = this.getQuery()._id;
-  await favourite
-    .deleteMany({ houseId: homeId })
+  await favourite.deleteMany({ houseId: homeId });
 });
 
 module.exports = mongoose.model("Home", homeSchema);
